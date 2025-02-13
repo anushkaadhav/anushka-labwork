@@ -1,0 +1,350 @@
+aTup=(10,20,30,40,50)
+print(aTup[ ::-1])
+(50, 40, 30, 20, 10)
+
+no=(1,2,3,4,5)
+
+con_n=[(n,n**2)for n in no]
+
+print(con_n)
+
+[(1, 1), (2, 4), (3, 9), (4, 16), (5, 25)]
+
+t1=(1,2,3,4,5)
+
+print(t1[2])
+
+3
+
+t1=(1,2,3,4)
+
+(a,b,c,d)=t1
+
+print(a,b,c,d)
+
+1 2 3 4
+
+T1=(1,2,3,4)
+
+new_T1=T1+(5,)
+
+print(new_T1)
+
+(1, 2, 3, 4, 5)
+
+tuple1=(11,22,33,44,55,66)
+
+new_tuple1=tuple1[3:5]
+
+print(new_tuple1)
+
+(44, 55)
+
+tuple1=(11,22,33,44,55,66)
+
+for i in tuple1:
+
+    if i==44 or i==55:
+
+        print("present")
+
+        new_tuple1+=(i,)
+
+    
+
+    else:
+
+        print("not present")
+
+print(new_tuple1)
+
+not present
+not present
+not present
+present
+present
+not present
+(44, 55, 44, 66, 44, 66, 44, 55)
+
+t1=('H','e','l','l','o')
+
+string_t1= ' '.join(t1)
+
+print(string_t1)
+
+​
+
+H e l l o
+
+tuple1 = ('Hello', 'Class', 'SYBCA')
+
+print("Your Tuple:", tuple1)
+
+​
+
+mystr  = ' '.join(tuple1)
+
+​
+
+print("The converted string is:", mystr)
+
+Your Tuple: ('Hello', 'Class', 'SYBCA')
+The converted string is: Hello Class SYBCA
+
+T1=(2,4,5,1,4,7.8,2.7)
+
+sort_T1=tuple(sorted(T1))
+
+print(sort_T1)
+
+(1, 2, 2.7, 4, 4, 5, 7.8)
+
+T1=(10,20,30,40,50,60,70,80,90,100,110)
+
+print(T1[4])
+
+print(T1[-5])
+
+50
+70
+
+tuple1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+print("Your tuple:",tuple1)
+
+​
+
+print(f"5th from front: {tuple1[4]}, 5th from last: {tuple1[-5]}.")
+
+Your tuple: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+5th from front: 5, 5th from last: 6.
+
+T1=(10,20,30,40,10)
+
+mylist=[]
+
+for x in T1:
+
+    if T1.count(x)>1:
+
+        if x not in mylist:
+
+            mylist.append(x)
+
+print(mylist)
+
+[10]
+
+T1=(10,20,30,50)
+
+no=20
+
+for i in T1:
+
+    if i==no:
+
+        print("exit")
+
+    else:
+
+        print("not exit")
+
+​
+
+not exit
+exit
+not exit
+not exit
+
+tuple1 = (1, 2, 3, 4, 5, 5, 7, 1, 9, 2)
+
+print("Your tuple:",tuple1)
+
+​
+
+key = int(input("Enter the element to be searched: "))
+
+​
+
+if key in tuple1:
+
+    print(f"Item {key} is present in the tuple.")
+
+else:
+
+    print(f"Item {key} is NOT present in the tuple.")
+
+Your tuple: (1, 2, 3, 4, 5, 5, 7, 1, 9, 2)
+Enter the element to be searched: 7
+Item 7 is present in the tuple.
+
+sets={1,2,3,4,4}
+
+print(sets)
+
+{1, 2, 3, 4}
+
+s={1,34,456}
+
+if s:
+
+    print(s.pop())
+
+else:
+
+    print("set is empty")
+
+set is empty
+
+s={0,1,2,3,4,5,6,7}
+
+for no in s:
+
+    print(no)
+
+    
+
+0
+1
+2
+3
+4
+5
+6
+7
+
+sample_set=set()
+
+sample_set.add(10)
+
+sample_set.add(20)
+
+sample_set.add(30)
+
+print(sample_set)
+
+sample_set.remove(20)
+
+print(sample_set)
+
+{10, 20, 30}
+{10, 30}
+
+s1=input("enter string:")
+
+v_list={'a','e','i','o','u'}
+
+if v_list.issubset(set(s1)):
+
+    print("string is vowels")
+
+else:
+
+    print("vowels are not present")
+
+enter string:ppl
+vowels are not present
+
+A={1,2,3,4,5}
+
+B={4,5,6,7,8}
+
+print(A.union(B))
+
+{1, 2, 3, 4, 5, 6, 7, 8}
+
+A={1,2,3,4,5}
+
+B={4,5,6,7,8}
+
+print(A.intersection(B))
+
+{4, 5}
+
+​
+
+A={1,2,3,4,5}
+
+B={4,5,6,7,8}
+
+print(A.union(B))
+
+​
+
+​
+
+{1, 2, 3, 4, 5, 6, 7, 8}
+
+set={10,4,456,78,2,123}
+
+print(max(set))
+
+print(min(set))
+
+456
+2
+
+A={1,2,3,4,5}
+
+B={4,5,6,7,8}
+
+print(A.difference(B))
+
+print(B.difference(A))
+
+print(A.symmetric_difference(B))
+
+{1, 2, 3}
+{8, 6, 7}
+{1, 2, 3, 6, 7, 8}
+
+setA={4,45,56,7,23,56}
+
+print(len(set))
+
+6
+
+setA={4,5436,231,34,3425}
+
+print(setA.copy())
+
+{3425, 34, 4, 231, 5436}
+
+set1 =  {1, 2, 3, 4, 5}
+
+set2 = {3, 4, 5, 6, 7, 8}
+
+​
+
+print(f"Your Set1: {set1}")
+
+print(f"Your Set2: {set2}")
+
+​
+
+​
+
+print(f"Set Difference: {set1.difference(set2)}")
+
+print(f"Set Symmetric Difference: {set1.symmetric_difference(set2)}")
+
+print(f"Set Intersection: {set1.intersection(set2)}")
+
+print(f"Set Union: {set1.union(set2)}")
+
+print(f"Set Disjoint: {set1.isdisjoint(set2)}")
+
+print(f"Set Subset: {set1.issubset(set2)}")
+
+print(f"Set Superset: {set1.issuperset(set2)}")
+
+Your Set1: {1, 2, 3, 4, 5}
+Your Set2: {3, 4, 5, 6, 7, 8}
+Set Difference: {1, 2}
+Set Symmetric Difference: {1, 2, 6, 7, 8}
+Set Intersection: {3, 4, 5}
+Set Union: {1, 2, 3, 4, 5, 6, 7, 8}
+Set Disjoint: False
+Set Subset: False
+Set Superset: False
+

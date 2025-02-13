@@ -1,0 +1,132 @@
+numlist=[10,20,30,40,50]
+total=0
+count=0
+i=0
+while i<len(numlist):
+    total=total+numlist[i]
+    count=count+1
+    i=i+1
+average=total/count
+print("average of number of list:",average)
+
+
+
+n=int(input("enter number:"))
+a,b=0,1
+print("fibbonacci series:")
+for i in range(n):
+    print(a,end='')
+    a,b=b,a+b
+    
+    
+    values=[]
+print("enter 6 integer number:")
+for i in range(6):
+    num=int(input(f"enter integer value{i+1}:"))
+    values.append(num)
+is_duplicate=False
+for i in values:
+    count=0;
+    for j in values:
+        if(i==j):
+            count=count+1;
+    if count>1:
+        is_duplicate=True
+        break
+if is_duplicate:
+    print("duplicate")
+else:
+    print("unique")
+        
+        
+        for i in range(6):
+    num=int(input(f"enter integer value{i+1}:"))
+    if num%2==0:
+        print("number is even",num)
+    else:
+        print("number is odd",num)
+        
+        
+        numlist=[10,20,30,40,50]
+total=0
+count=0
+
+for number in numlist:
+    total=total+number
+    count=count+1
+    i=i+1
+average=total/count
+print("average of number of list:",average)
+
+
+num=int(input("enter a number:"))
+print("prime number:")
+for i in range(2,num+1):
+    flag=True
+    for j in range(2,i):
+        if i%j==0:
+            flag=False
+            break
+    if flag:
+        print(i)
+    
+    
+    n=int(input("enter number:"))
+found=False
+for i in range(1,21):
+    if i==n:
+        print("ok")
+        found=True
+        break
+if found==False:
+    print("out of range")
+    
+    
+    
+    n=int(input("enter number:"))
+rev=0
+
+while n>0:
+    digit=n%10
+    rev=(rev*10)+digit
+    n=n//10
+print(rev)
+    
+    
+    
+    n=int(input("enter number:"))
+sum=0
+
+while n!=0:
+    digit=n%10
+    sum=sum+digit
+    n=n//10
+   p rint(f"sum of digits:{sum}")
+
+    
+    
+    n1=int(input("enter number 1:"))
+n2=int(input("enter number 2:"))
+if n1==n2:
+    print("SAME identity")
+else:
+    print("DIFFERENT identity")
+    
+    
+    
+import sys
+sys.argv=["que2","70"]
+if len(sys.argv)!=2:
+    print("not valid")
+else:
+    value=int(sys.argv[1])
+    if 1<=value<=50:
+        print("ok")
+    else:
+        print("out of range")
+        
+
+
+
+
+

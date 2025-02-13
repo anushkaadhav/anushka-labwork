@@ -1,0 +1,330 @@
+
+
+demooooo python
+
+
+
+     print("Hello")
+
+Hello
+
+​
+
+​
+
+   print("python","is","fun",sep='-',end='!')
+
+python-is-fun!
+
+  name="sybca"
+
+no=123
+
+print("Name:",name,"No:",no)
+
+print(type(name))
+
+print(type(no))
+
+Name: sybca No: 123
+<class 'str'>
+<class 'int'>
+
+name="sybca"
+
+no=123.4
+
+print("Name:",name,"No:",no)
+
+print(type(name))
+
+print(type(no))
+
+Name: sybca No: 123.4
+<class 'str'>
+<class 'float'>
+
+a=int(input("enter a value"))
+
+b=int(input("enter b value"))
+
+c=a+b
+
+print("addition=",c)
+
+enter a value3
+enter b value6
+addition= 9
+
+Type Markdown and LaTeX: α2
+
+name=input("enter your name:")
+
+print("name",name)
+
+age=int(input("enter your age:"))
+
+print("age",age)
+
+enter your name:anushka
+name anushka
+enter your age:20
+age 20
+
+name=input("enter your name:")
+
+print("name",name)
+
+age=input("enter your age:")
+
+print("age",age)
+
+enter your name:anushka
+name anushka
+enter your age:20
+age 20
+
+name=input("enter your name:")
+
+print("name",name)
+
+print(type(name))
+
+age=int(input("enter your age:"))
+
+print("age",age)
+
+enter your name:anu
+name anu
+<class 'str'>
+enter your age:20
+age 20
+
+name=input("enter name:")
+
+print("Hello"+name)
+
+enter name:anushka
+Helloanushka
+
+name=input("enter name:")
+
+print("Hello "+name)
+
+enter name:anushka
+Hello anushka
+
+name=input("enter name:")
+
+print("Hello "+name) 
+
+enter name:anu
+Hello anu
+
+
+result=(10+20+
+
+      30+40+
+
+      50)
+
+print(result)
+
+150
+
+
+enter the number-1
+the number is negative
+
+number = int(input("enter the number"))
+
+if number > 0:
+
+    print("the number is positive")
+
+else:
+
+    print("the number is negative")
+
+enter the number4
+the number is positive
+
+​
+
+number=int(input("enter the number"))
+
+if number%2==0:
+
+    print("the number is even")
+
+else:
+
+    print("the number is odd")
+
+enter the number4
+the number is even
+
+n=int(input("enter value of n"))
+
+i=1;
+
+while i<=n:
+
+    print(i)
+
+    i+=1
+
+enter value of n7
+1
+2
+3
+4
+5
+6
+7
+
+number = int(input("enter the number"))
+
+if number==0:
+
+    print("number is zero")
+
+elif number > 0:
+
+    print("the number is positive")
+
+else:
+
+    print("the number is negative")
+
+enter the number0
+number is zero
+
+total=0
+
+while True:
+
+    num=int(input("enter the number"))
+
+    if num==0:
+
+        break
+
+    total=total+num
+
+print("total is",total)        
+
+enter the number5
+enter the number4
+enter the number3
+enter the number2
+enter the number0
+total is 14
+
+while True:
+
+    num=int(input("enter number"))
+
+    if num>0:
+
+        break
+
+    print("the number is not positive!try again")
+
+print(f"the number{num}is a positive number")
+
+#print("the number",num,"is a positive number")
+
+enter number-5
+the number is not positive!try again
+enter number-3
+the number is not positive!try again
+enter number8
+the number8is a positive number
+
+for i in range(1,6):
+
+    print(i)
+
+1
+2
+3
+4
+5
+
+for c in "hello":
+
+    print(c)
+
+h
+e
+l
+l
+o
+
+name="sybca"
+
+for c in name:
+
+    print(c)
+
+    
+
+s
+y
+b
+c
+a
+
+for _ in range(5):
+
+    print("Hello")
+
+Hello
+Hello
+Hello
+Hello
+Hello
+
+for i in range(1,6):
+
+    print(f"the square of{i}is {i**2}")
+
+the square of1is 1
+the square of2is 4
+the square of3is 9
+the square of4is 16
+the square of5is 25
+
+n=int(input("enter number"))
+
+total=0
+
+for i in range(1,n+1):
+
+    total+=i
+
+print(f"the sum of number from 1 to{n} is {total}")
+
+enter number5
+
+the sum of number from 1 to5 is 15
+
+
+num=int(input("enter number"))
+
+fact=1
+
+for i in range(1,num+1):
+
+     fact=fact*i
+
+print(f"the factorial of {num}:{fact}")
+
+    
+
+enter number4
+the factorial of 4:24
+
+
+

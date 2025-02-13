@@ -1,0 +1,162 @@
+text="Hello"
+print(text.upper())
+print(text.lower())
+print(text.title())
+print(text.replace("l","$"))
+print(text.count("l"))
+
+text="Hello"
+print(text.upper())
+print(text.lower())
+print(text.title())
+print(text.replace("l","$"))
+print(text.count("l"))
+
+text="hello world"
+print(text.split())
+print(text.startswith("hello"))
+print(text.endswith("world"))
+
+istring=input("enter the string:")
+if len(istring)<2:
+    print("empty string")
+else:
+    firsttwo=istring[0]+istring[1]
+    lasttwo=istring[-2]+istring[-1]
+    result=firsttwo+lasttwo
+    print("final string:",result)
+    
+    
+string=input("enter the string:")
+ostring=string.replace('a','$')
+print("string after replacing occurance of a with $:",ostring)
+
+
+string=input("enter the string:")
+visitedchar=""
+print("character frequency")
+for i in string:
+    if i not in visitedchar:
+        count=0;
+        for j in string:
+            if i==j:
+                count=count+1;
+        print(f"{i}:{count}")
+        visitedchar=visitedchar+i
+        
+        
+        
+        
+        string=input("enter the string:")
+count=0
+for i in string:
+    count=count+1
+print(count)
+
+
+string=input("enter the string:")
+flag=False
+for i in string:
+    if i=='a' or i=='e' or i=='i' or i=='o' or i=='u':
+        flag=True
+        break
+if flag:
+    print("vowels are present")        
+else:
+    print("vowels are not present")
+
+
+string=input("enter the string:")
+rev=string[ ::-1]
+print(rev)
+if string.lower()==rev.lower():
+    print(f"{string} is palindrome")
+else:
+    print(f"{string} is not a palindrome")
+
+
+s1=input("enter string:")
+s2=reversed(s1)
+if list(s1)==list(s2):
+    print("the string is palindrome")
+else:
+    print("the string is not a palindrome")
+    
+    s1=input("enter string:")
+vowels=['a','e','i','o','u']
+if list(s1)==list(vowels):
+    print("vowels are present")
+else:
+    print("vowels are not present")
+    
+    mystring1 = input("Enter a String 1: ")
+print("Your String 1:", mystring1)
+
+mystring2 = input("Enter a String 2: ")
+print("Your String 2:", mystring2)
+
+result = mystring1.replace(mystring1[0:1],mystring2[0:1]) + " " + mystring2.replace(mystring2[0:1],mystring1[0:1]) 
+
+print(f"Result String: {result}")
+
+
+
+mystring = input("Enter a String: ")
+print("Your String:", mystring)
+
+Digits = 0
+Letters = 0
+
+for x in mystring:
+    if x.isalpha():
+        Letters += 1
+    
+    if x.isdigit():
+        Digits += 1
+        
+print(f"Result: Digits: {Digits}, Letters: {Letters}")
+
+
+
+mystring = str(input("Enter a String: "))
+print("Your String:", mystring)
+
+newstr = ""
+
+for i in range(len(mystring)):
+    if(i % 2 == 0):
+        newstr += mystring[i]
+
+print(f"Converted String: {newstr}")
+
+
+mystring = str(input("Enter a String: "))
+print("Your String:", mystring)
+
+frequency = {}
+
+for x in mystring.split():
+    if x in frequency:
+        frequency[x] += 1
+    else:
+        frequency[x] = 1
+
+print(f"Frequency of each word: {frequency}")
+
+
+
+mystring = str(input("Enter a String: "))
+print("Your String:", mystring)
+
+newstr = ""
+
+for word in mystring:
+    if word.isalnum() or word.isspace():
+        newstr += word
+
+print(f"Converted String: {newstr}")
+    
+    
+
+
+
