@@ -1,88 +1,77 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['array'])) 
+{
+    $_SESSION['array'] = [];
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+    $action = $_POST['action'];
+
+    if ($action == "set_array") 
+    {
+        $_SESSION['array'] = array_map('trim', explode(',', $_POST['array']));
+        $message = "Array has been set.";
+    } 
+    elseif ($action == "sort_asc") 
+    {
+        asort($_SESSION['array']);
+        $message = "Array sorted in ascending order: " . implode(", ", $_SESSION['array']);
+    } 
+    elseif ($action == "sort_desc") 
+    {
+        arsort($_SESSION['array']);
+        $message = "Array sorted in descending order: " . implode(", ", $_SESSION['array']);
+    } 
+    elseif ($action == "sort_no_change") 
+    {
+        $sorted = $_SESSION['array'];
+        sort($sorted);
+        $message = "Array sorted by values without changing keys: " . implode(", ", $sorted);
+    } 
+    elseif ($action == "filter_odds") 
+    {
+        $filtered = array_filter($_SESSION['array'], function($value) 
+        {
+            return $value % 2 !== 0;
+        });
+        
+        $message = "Filtered odd elements: " . implode(", ", $filtered);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Associative Array Operations</title>
 </head>
 <body>
     <h1>Associative Array Operations</h1>
-    
-    <form method="post">
-        <label for="operation">Select Operation:</label>
-        <select name="operation" id="operation">
-            <option value="sort_asc">Sort by Values (Ascending Order)</option>
-            <option value="sort_desc">Sort by Values (Descending Order)</option>
-            <option value="sort_no_change">Sort by Values (Without Changing Keys)</option>
-            <option value="filter_odd">Filter Odd Elements</option>
-        </select><br><br>
 
-        <input type="submit" value="Perform Operation">
+    <form method="post" action="">
+        <label for="array">Enter Array (comma-separated):</label>
+        <input type="text" name="array" id="array" required>
+        <input type="submit" name="action" value="set_array">
+    </form>
+
+    <h2>Choose an Operation:</h2>
+    <form method="post" action="">
+        <input type="submit" name="action" value="sort_asc">
+        <input type="submit" name="action" value="sort_desc">
+        <input type="submit" name="action" value="sort_no_change">
+        <input type="submit" name="action" value="filter_odds">
     </form>
 
     <?php
-      
-        $arr = array(
-            "a" => 10,
-            "b" => 3,
-            "c" => 15,
-            "d" => 8,
-            "e" => 25,
-            "f" => 7
-        );
+    if (isset($message)) {
+        echo "<p>$message</p>";
+    }
 
-       
-        function displayArray($array) 
-        {
-            echo "<pre>";
-            print_r($array);
-            echo "</pre>";
-        }
-
-       
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $operation = $_POST["operation"];
-            
-            switch($operation) 
-            {
-                case "sort_asc":
-                    
-                    asort($arr);
-                    echo "<h2>Array Sorted by Values (Ascending Order):</h2>";
-                    displayArray($arr);
-                    break;
-
-                case "sort_desc":
-                    
-                    arsort($arr);
-                    echo "<h2>Array Sorted by Values (Descending Order):</h2>";
-                    displayArray($arr);
-                    break;
-
-                case "sort_no_change":
-                    
-                    $sortedArr = $arr;
-                    asort($sortedArr);
-                    echo "<h2>Array Sorted by Values (Without Changing Keys):</h2>";
-                    displayArray($sortedArr);
-                    break;
-
-                case "filter_odd":
-                    
-                    $filteredArr = array_filter($arr, function($value) 
-                    {
-                        return $value % 2 == 0; 
-                    });
-                    echo "<h2>Array After Filtering Odd Elements:</h2>";
-                    displayArray($filteredArr);
-                    break;
-
-                default:
-                    echo "<h2>Invalid Operation!</h2>";
-            }
-        }
+    echo "<h2>Current Array:</h2>";
+    echo "<strong>Array:</strong> " . implode(", ", $_SESSION['array']) . "<br>";
     ?>
-
 </body>
 </html>
-

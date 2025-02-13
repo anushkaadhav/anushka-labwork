@@ -1,81 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Associative Arrays Operations</title>
-</head>
-<body>
-
-<h1>Associative Arrays Operations</h1>
-
-<form method="POST">
-    <label for="array1">Enter first associative array (comma-separated key:value pairs): </label><br>
-    <input type="text" id="array1" name="array1" placeholder="key1:value1,key2:value2"><br><br>
-
-    <label for="array2">Enter second associative array (comma-separated key:value pairs): </label><br>
-    <input type="text" id="array2" name="array2" placeholder="key1:value1,key2:value2"><br><br>
-
-    <label for="operation">Choose operation:</label><br>
-    <select name="operation" id="operation">
-        <option value="merge">Merge</option>
-        <option value="intersection">Intersection</option>
-        <option value="union">Union</option>
-        <option value="set_difference">Set Difference</option>
-    </select><br><br>
-
-    <input type="submit" name="submit" value="Perform Operation">
-</form>
 
 <?php
-if (isset($_POST['submit'])) 
-{
-    
-    $array1 = stringToAssociativeArray($_POST['array1']);
-    $array2 = stringToAssociativeArray($_POST['array2']);
-    $operation = $_POST['operation'];
+session_start();
 
-    
-    switch ($operation)
-    {
-        case 'merge':
-            echo "<h3>Merge of Array1 and Array2:</h3>";
-            print_r(array_merge($array1, $array2));
-            break;
-
-        case 'intersection':
-            echo "<h3>Intersection of Array1 and Array2:</h3>";
-            print_r(array_intersect_assoc($array1, $array2));
-            break;
-
-        case 'union':
-            echo "<h3>Union of Array1 and Array2:</h3>";
-            print_r(array_merge($array1, $array2)); 
-            break;
-
-        case 'set_difference':
-            echo "<h3>Set Difference (Array1 - Array2):</h3>";
-            print_r(array_diff_assoc($array1, $array2));
-            break;
-
-        default:
-            echo "<h3>Invalid Operation</h3>";
-    }
+if (!isset($_SESSION['array1'])) {
+    $_SESSION['array1'] = [];
+}
+if (!isset($_SESSION['array2'])) {
+    $_SESSION['array2'] = [];
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $action = $_POST['action'];
 
-function stringToAssociativeArray($str)
- {
-    $arr = [];
-    $pairs = explode(',', $str);
-    foreach ($pairs as $pair) {
-        list($key, $value) = explode(':', $pair);
-        $arr[trim($key)] = trim($value);
+    if ($action == "set_arrays") 
+    {
+        $_SESSION['array1'] = array_map('trim', explode(',', $_POST['array1']));
+        $_SESSION['array2'] = array_map('trim', explode(',', $_POST['array2']));
+        $message = "Arrays have been set.";
+    } 
+    elseif ($action == "merge") 
+    {
+        $merged = array_merge($_SESSION['array1'], $_SESSION['array2']);
+        $message = "Merged Array: " . implode(", ", $merged);
+    } 
+    elseif ($action == "intersection") 
+    {
+        $intersection = array_intersect($_SESSION['array1'], $_SESSION['array2']);
+        $message = "Intersection: " . implode(", ", $intersection);
+    } 
+    elseif ($action == "union") 
+    {
+        $union = array_unique(array_merge($_SESSION['array1'], $_SESSION['array2']));
+        $message = "Union: " . implode(", ", $union);
+    } 
+    elseif ($action == "difference") 
+    {
+        $difference = array_diff($_SESSION['array1'], $_SESSION['array2']);
+        $message = "Set Difference (Array1 - Array2): " . implode(", ", $difference);
     }
-    return $arr;
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Associative Array Operations</title>
+</head>
+<body>
+    <h1>Associative Array Operations</h1>
+
+    <form method="post" action="A3SetC1.php">
+        <label for="array1">Enter Array 1 (comma-separated):</label>
+        <input type="text" name="array1" id="array1" required>
+        
+        <label for="array2">Enter Array 2 (comma-separated):</label>
+        <input type="text" name="array2" id="array2" required>
+
+        <input type="submit" name="action" value="set_arrays">
+    </form>
+
+    <h2>Choose an Operation:</h2>
+    <form method="post" action="">
+        <input type="submit" name="action" value="merge">
+        <input type="submit" name="action" value="intersection">
+        <input type="submit" name="action" value="union">
+        <input type="submit" name="action" value="difference">
+    </form>
+
+    <?php
+    if (isset($message)) {
+        echo "<p>$message</p>";
+    }
+
+    echo "<h2>Current Arrays:</h2>";
+    echo "<strong>Array 1:</strong> " . implode(", ", $_SESSION['array1']) . "<br>";
+    echo "<strong>Array 2:</strong> " . implode(", ", $_SESSION['array2']) . "<br>";
+    ?>
 </body>
 </html>
 

@@ -1,40 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Multidimensional Array Operations</title>
+    <title>Multidimensional Array Operations</title>
 </head>
 <body>
+    <h1>Multidimensional Array Operations</h1>
+    
+    <form method="post" action="A3SetB1.php">
+        <label for="action">Choose an action:</label>
+        <select name="action" id="action">
+            <option value="display">Display Element</option>
+            <option value="delete">Delete Element</option>
+        </select>
+        
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+            <option value="fruits">Fruits</option>
+            <option value="vegetables">Vegetables</option>
+            <option value="grains">Grains</option>
+        </select>
+        
+        <label for="index">Index:</label>
+        <input type="number" name="index" id="index" min="0" required>
+        
+        <input type="submit" value="Submit">
+    </form>
 
-<?php
+    <?php
+    
+    $array = array(
+        "fruits" => array("apple", "banana", "cherry"),
+        "vegetables" => array("carrot", "lettuce", "pepper"),
+        "grains" => array("rice", "wheat", "corn")
+    );
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") 
+    {
+        $action = $_POST['action'];
+        
+        if ($action == "display") 
+        {
+            $category = $_POST['category'];
+            $index = $_POST['index'];
+            
+            if (isset($array[$category][$index])) 
+            {
+                $output = "Element: " . $array[$category][$index];
+            } 
+            else 
+            {
+                $output = "Invalid category or index.";
+            }
+        } 
+        elseif ($action == "delete") 
+        {
+            $category = $_POST['category'];
+            $index = $_POST['index'];
+            
+            if (isset($array[$category][$index])) 
+            {
+                unset($array[$category][$index]);
+                $output = "Element deleted successfully.";
+            } 
+            else 
+            {
+                $output = "Invalid category or index.";
+            }
+        }
+    }
 
-$array = [
-    ['John', 'Doe', 25],
-    ['Jane', 'Smith', 30],
-    ['Alice', 'Johnson', 22]
- ];
-
-
-echo "<h2>Original Array:</h2>";
-echo "<pre>";
-print_r($array);
-echo "</pre>";
-
-
-echo "<h2>Specific Element (First name of second person):</h2>";
-echo $array[1][0] . "<br>"; 
-
-
-unset($array[1]);
-
-
-echo "<h2>Array After Deletion of Second Element:</h2>";
-echo "<pre>";
-print_r($array);
-echo "</pre>";
-?>
-
+    if (isset($output)) 
+    {
+        echo "<p>$output</p>";
+    }
+    echo "<h2>Current Array Content:</h2>";
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
+    ?>
 </body>
 </html>
 

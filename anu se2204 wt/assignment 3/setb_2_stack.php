@@ -1,80 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stack Operations - Insert and Delete</title>
-</head>
-<body>
-
-<h2>Stack Operations Menu</h2>
-
 <?php
+session_start(); 
 
-$stack = [4,5];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
- {
-    $operation = $_POST['operation'];
-    $element = isset($_POST['element']) ? $_POST['element'] : null;
-
-    switch ($operation) 
-    {
-      case 'insert':
-            if ($element !== null && !empty($element)) 
-            {
-                array_push($stack, $element);
-                echo "<p>'$element' inserted into the stack.</p>";
-            } 
-            else
-             {
-                echo "<p>Please enter an element to insert.</p>";
-            }
-            break;
-
-    case 'delete':
-            if (!empty($stack)) 
-            {
-                $deletedElement = array_pop($stack);
-                echo "<p>'$deletedElement' deleted from the stack.</p>";
-            } 
-            else
-             {
-                echo "<p>Stack is empty. Cannot delete an element.</p>";
-            }
-            break;
-
-     default:
-            echo "<p>Invalid operation. Please select a valid option.</p>";
-            break;
-    }
+if (!isset($_SESSION['stack'])) 
+{
+    $_SESSION['stack'] = array();
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+    $action = $_POST['action'];
 
-echo "<h3>Current Stack:</h3>";
-echo "<pre>";
-print_r($stack);
-echo "</pre>";
+    if ($action == "insert") 
+    {
+        $element = $_POST['element'];
+        array_push($_SESSION['stack'], $element);
+        $message = "Element '$element' inserted successfully.";
+    } 
+    elseif ($action == "delete") 
+    {
+        if (!empty($_SESSION['stack'])) 
+        {
+            $removedElement = array_pop($_SESSION['stack']);
+            $message = "Element '$removedElement' deleted successfully.";
+        } 
+        else 
+        {
+            $message = "Stack is empty. No element to delete.";
+        }
+    }
+}
 ?>
 
-<form method="POST">
-    <h3>Select an operation:</h3>
-    
-    <label>
-        <input type="radio" name="operation" value="insert"> Insert Element
-    </label><br>
+<!DOCTYPE html>
+<html lang="en">
 
-    <label>
-        <input type="radio" name="operation" value="delete"> Delete Element
-    </label><br><br>
+<head>
+    <title>Stack Operations</title>
+</head>
 
-    <!-- Input field for inserting an element -->
-    <label for="element">Enter Element (for Insert):</label>
-    <input type="text" name="element" id="element" placeholder="Enter element"><br><br>
+<body>
+    <h1>Stack Operations</h1>
 
-    <button type="submit">Submit</button>
-</form>
+    <form method="post" action="A3SetB2.php">
+        <label for="action">Choose an action:</label>
+        <select name="action" id="action">
+            <option value="insert">Insert Element</option>
+            <option value="delete">Delete Element</option>
+        </select>
 
+        <label for="element">Element:</label>
+        <input type="text" name="element" id="element" required>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <?php
+    if (isset($message)) {
+        echo "<p>$message</p>";
+    }
+
+    echo "<h2>Current Stack Content:</h2>";
+    echo "<pre>";
+    print_r($_SESSION['stack']);
+    echo "</pre>";
+    ?>
 </body>
+
 </html>
 
