@@ -41,6 +41,7 @@ int main()
     Numbers n1(num);
     
     n1.findsum();
+    
 
     return 0;
 }
