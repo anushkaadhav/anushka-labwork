@@ -1,215 +1,193 @@
 <?php
 
-// Base class Account
-class Account {
-    protected $accno;
-    protected $cust_name;
+abstract class Account
+{
+    protected $Acc_Holder_Name;
+    protected $Acc_Holder_Contact_No;
 
-    // Constructor to initialize account number and customer name
-    public function __construct($accno, $cust_name) {
-        $this->accno = $accno;
-        $this->cust_name = $cust_name;
+    public function __construct($name, $contact)
+    {
+        $this->Acc_Holder_Name = $name;
+        $this->Acc_Holder_Contact_No = $contact;
     }
 
-    // Method to display account details
-    public function displayAccountDetails() {
-        echo "Account No: " . $this->accno . "\n";
-        echo "Customer Name: " . $this->cust_name . "\n";
-    }
+    abstract public function displayInfo();
+    abstract public function deposit($amount);
+    abstract public function withdraw($amount);
+    abstract public function checkbal();
+    abstract public function getAccNo();
+    abstract public function calculateInterest();
 }
 
-// Derived class Saving_Acc from Account
-class Saving_Acc extends Account {
+class Saving_Account extends Account
+{
+    private $S_Acc_No;
     private $balance;
-    private $min_amount;
 
-    // Constructor to initialize balance and minimum amount
-    public function __construct($accno, $cust_name, $balance, $min_amount) {
-        parent::__construct($accno, $cust_name);
-        $this->balance = $balance;
-        $this->min_amount = $min_amount;
+    public function __construct($name, $contact, $accNo, $initialbal)
+    {
+        parent::__construct($name, $contact);
+        $this->S_Acc_No = $accNo;
+        $this->balance = $initialbal;
     }
 
-    // Method to display saving account details
-    public function displaySavingDetails() {
-        $this->displayAccountDetails();
-        echo "Balance: " . $this->balance . "\n";
-        echo "Minimum Amount: " . $this->min_amount . "\n";
-    }
-
-    // Method to deposit amount into the saving account
-    public function deposit($amount) {
+    public function deposit($amount)
+    {
         $this->balance += $amount;
-        echo "Deposited: " . $amount . ". New Balance: " . $this->balance . "\n";
+        echo "Deposited Rs. " . $amount . " into Savings Account<br>";
     }
 
-    // Method to withdraw amount from the saving account
-    public function withdraw($amount) {
-        if ($this->balance - $amount >= $this->min_amount) {
+    public function withdraw($amount)
+    {
+        if ($this->balance - $amount >= 2000) {
             $this->balance -= $amount;
-            echo "Withdrew: " . $amount . ". New Balance: " . $this->balance . "\n";
+            echo "Withdrawn Rs. " . $amount . " from Savings Account<br>";
         } else {
-            echo "Insufficient balance or below minimum required balance.\n";
+            echo "Insufficient balance for withdrawal in Savings Account<br>";
         }
     }
-}
 
-// Derived class Current_Acc from Account
-class Current_Acc extends Account {
-    private $balance;
-    private $min_amount;
-
-    // Constructor to initialize balance and minimum amount
-    public function __construct($accno, $cust_name, $balance, $min_amount) {
-        parent::__construct($accno, $cust_name);
-        $this->balance = $balance;
-        $this->min_amount = $min_amount;
-    }
-
-    // Method to display current account details
-    public function displayCurrentDetails() {
-        $this->displayAccountDetails();
-        echo "Balance: " . $this->balance . "\n";
-        echo "Minimum Amount: " . $this->min_amount . "\n";
-    }
-
-    // Method to deposit amount into the current account
-    public function deposit($amount) {
-        $this->balance += $amount;
-        echo "Deposited: " . $amount . ". New Balance: " . $this->balance . "\n";
-    }
-
-    // Method to withdraw amount from the current account
-    public function withdraw($amount) {
-        if ($this->balance - $amount >= $this->min_amount) {
-            $this->balance -= $amount;
-            echo "Withdrew: " . $amount . ". New Balance: " . $this->balance . "\n";
-        } else {
-            echo "Insufficient balance or below minimum required balance.\n";
+    public function checkbal()
+    {
+        if ($this->balance < 2000) {
+            $this->balance -= 500;
+            echo "Service charge of Rs. 500 imposed due to low balance in Savings Account<br>";
         }
     }
+
+    public function calculateInterest()
+    {
+        $interest = 0.10 * $this->balance;
+        $this->balance += $interest;
+        echo "Interest Rs. " . $interest . " added to Savings Account<br>";
+    }
+
+    public function displayInfo()
+    {
+        echo "\nAccount Type: Saving Account<br>";
+        echo "Account Holder: " . $this->Acc_Holder_Name . "<br>";
+        echo "Contact No: " . $this->Acc_Holder_Contact_No . "<br>";
+        echo "Account Number: " . $this->S_Acc_No . "<br>";
+        echo "balance: Rs. " . $this->balance . "<br>";
+    }
+
+    public function getAccNo()
+    {
+        return $this->S_Acc_No;
+    }
 }
 
-// Main menu-driven program
-$accounts = [];
+class Current_Account extends Account
+{
+    private $C_Acc_No;
+    private $balance;
 
-do {
-    echo "\nMain Menu:\n";
-    echo "1. Saving Account\n";
-    echo "2. Current Account\n";
-    echo "3. Exit\n";
-    $choice = (int)readline("Enter your choice: ");
-
-    switch ($choice) {
-        case 1: // Saving Account Menu
-            echo "\nSaving Account Menu:\n";
-            echo "1. Create Account\n";
-            echo "2. Deposit\n";
-            echo "3. Withdraw\n";
-            echo "4. Back to Main Menu\n";
-            $sub_choice = (int)readline("Enter your choice: ");
-
-            switch ($sub_choice) {
-                case 1: // Create Saving Account
-                    $accno = readline("Enter Account Number: ");
-                    $cust_name = readline("Enter Customer Name: ");
-                    $balance = (float)readline("Enter Initial Balance: ");
-                    $min_amount = (float)readline("Enter Minimum Balance: ");
-                    $saving_acc = new Saving_Acc($accno, $cust_name, $balance, $min_amount);
-                    array_push($accounts, $saving_acc);
-                    echo "Saving Account Created Successfully!\n";
-                    break;
-
-                case 2: // Deposit to Saving Account
-                    $accno = readline("Enter Account Number to Deposit: ");
-                    $amount = (float)readline("Enter Deposit Amount: ");
-                    foreach ($accounts as $account) {
-                        if ($account instanceof Saving_Acc && $account->accno == $accno) {
-                            $account->deposit($amount);
-                            break;
-                        }
-                    }
-                    break;
-
-                case 3: // Withdraw from Saving Account
-                    $accno = readline("Enter Account Number to Withdraw: ");
-                    $amount = (float)readline("Enter Withdrawal Amount: ");
-                    foreach ($accounts as $account) {
-                        if ($account instanceof Saving_Acc && $account->accno == $accno) {
-                            $account->withdraw($amount);
-                            break;
-                        }
-                    }
-                    break;
-
-                case 4: // Back to Main Menu
-                    break;
-
-                default:
-                    echo "Invalid choice. Try again.\n";
-                    break;
-            }
-            break;
-
-        case 2: // Current Account Menu
-            echo "\nCurrent Account Menu:\n";
-            echo "1. Create Account\n";
-            echo "2. Deposit\n";
-            echo "3. Withdraw\n";
-            echo "4. Back to Main Menu\n";
-            $sub_choice = (int)readline("Enter your choice: ");
-
-            switch ($sub_choice) {
-                case 1: // Create Current Account
-                    $accno = readline("Enter Account Number: ");
-                    $cust_name = readline("Enter Customer Name: ");
-                    $balance = (float)readline("Enter Initial Balance: ");
-                    $min_amount = (float)readline("Enter Minimum Balance: ");
-                    $current_acc = new Current_Acc($accno, $cust_name, $balance, $min_amount);
-                    array_push($accounts, $current_acc);
-                    echo "Current Account Created Successfully!\n";
-                    break;
-
-                case 2: // Deposit to Current Account
-                    $accno = readline("Enter Account Number to Deposit: ");
-                    $amount = (float)readline("Enter Deposit Amount: ");
-                    foreach ($accounts as $account) {
-                        if ($account instanceof Current_Acc && $account->accno == $accno) {
-                            $account->deposit($amount);
-                            break;
-                        }
-                    }
-                    break;
-
-                case 3: // Withdraw from Current Account
-                    $accno = readline("Enter Account Number to Withdraw: ");
-                    $amount = (float)readline("Enter Withdrawal Amount: ");
-                    foreach ($accounts as $account) {
-                        if ($account instanceof Current_Acc && $account->accno == $accno) {
-                            $account->withdraw($amount);
-                            break;
-                        }
-                    }
-                    break;
-
-                case 4: // Back to Main Menu
-                    break;
-
-                default:
-                    echo "Invalid choice. Try again.\n";
-                    break;
-            }
-            break;
-
-        case 3: // Exit
-            echo "Exiting the program.\n";
-            break;
-
-        default:
-            echo "Invalid choice. Try again.\n";
-            break;
+    public function __construct($name, $contact, $accNo, $initialbal)
+    {
+        parent::__construct($name, $contact);
+        $this->C_Acc_No = $accNo;
+        $this->balance = $initialbal;
     }
-} while ($choice != 3);
+
+    public function deposit($amount)
+    {
+        $this->balance += $amount;
+        echo "Deposited Rs. " . $amount . " into Current Account<br>";
+    }
+
+    public function withdraw($amount)
+    {
+        if ($this->balance - $amount >= 5000) {
+            $this->balance -= $amount;
+            echo "Withdrawn Rs. " . $amount . " from Current Account<br>";
+            $this->checkbal();
+        } else {
+            echo "Insufficient balance for withdrawal in Current Account<br>";
+            $this->checkbal();
+        }
+    }
+
+    public function checkbal()
+    {
+        if ($this->balance < 5000) {
+            $this->balance -= 1000;
+            echo "Service charge of Rs. 1000 imposed due to low balance in Current Account<br>";
+        }
+    }
+
+    public function calculateInterest()
+    {
+        echo "No interest applicable for Current Account.<br>";
+    }
+
+    public function displayInfo()
+    {
+        echo "\nAccount Type: Current Account<br>";
+        echo "Account Holder: " . $this->Acc_Holder_Name . "<br>";
+        echo "Contact No: " . $this->Acc_Holder_Contact_No . "<br>";
+        echo "Account Number: " . $this->C_Acc_No . "<br>";
+        echo "balance: Rs. " . $this->balance . "<br>";
+    }
+
+    public function getAccNo()
+    {
+        return $this->C_Acc_No;
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+    $name = $_POST['name'];
+    $contact = $_POST['contact'];
+    $account_type = $_POST['account_type'];
+    $acc_no = $_POST['acc_no'];
+    $balance = $_POST['balance'];
+
+    $account = null;
+
+    if ($account_type == 'saving') {
+        $account = new Saving_Account($name, $contact, $acc_no, $balance);
+    } elseif ($account_type == 'current') {
+        $account = new Current_Account($name, $contact, $acc_no, $balance);
+    }
+
+    if ($account) {
+        $account->displayInfo();
+    } else {
+        echo "Invalid account type.";
+    }
+}
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A4SetB1</title>
+</head>
+<body>
+    <h2>Create Bank Account</h2>
+    <form action="set_b_1.php" method="POST">
+        <label for="name">Account Holder's Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="contact">Account Holder's Contact Number:</label>
+        <input type="number" id="contact" name="contact" required><br><br>
+
+        <label for="account_type">Choose Account Type:</label>
+        <select name="account_type" id="account_type" required>
+            <option value="saving">Saving Account</option>
+            <option value="current">Current Account</option>
+        </select><br><br>
+
+        <label for="acc_no">Account Number:</label>
+        <input type="number" id="acc_no" name="acc_no" required><br><br>
+
+        <label for="balance">Initial balance (Rs.):</label>
+        <input type="number" id="balance" name="balance" required><br><br>
+
+        <input type="submit" value="Create Account">
+    </form>
+</body>
+</html>
 
