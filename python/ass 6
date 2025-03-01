@@ -1,0 +1,152 @@
+area_of_square = lambda side: side * side
+
+print(area_of_square(5))  
+
+25
+
+
+
+
+def multiply_list(numbers):
+
+    result = 1
+
+    for num in numbers:
+
+        result *= num
+
+    return result
+
+​sample_list = [8, 2, 3, -1, 7]
+
+print(multiply_list(sample_list))
+
+-336
+
+
+
+
+
+
+
+def is_in_range(number, start, end):
+
+    return start <= number <= end
+
+​
+# Example Usage
+
+print(is_in_range(5, 1, 10))  # Output: True
+
+print(is_in_range(15, 1, 10)) # Output: False
+
+True
+False
+
+
+
+
+def showEmployee(name, salary=9000):
+
+    print(f"Employee Name: {name}, Salary: {salary}")
+
+​
+showEmployee("John", 12000)  # Output: Employee Name: John, Salary: 12000
+
+showEmployee("Alice")
+
+Employee Name: John, Salary: 12000
+Employee Name: Alice, Salary: 9000
+
+
+
+
+def is_prime(n):
+
+    if n < 2:
+
+        return False
+
+    for i in range(2, int(n ** 0.5) + 1):
+
+        if n % i == 0:
+
+            return False
+
+    return True
+
+# Example Usage
+
+print(is_prime(7))  # Output: True
+
+print(is_prime(10)) # Output: False
+
+True
+False
+
+
+
+
+
+def reverse_string(s):
+
+    for char in reversed(s):
+
+        yield char
+
+​# Example Usage
+
+gen = reverse_string("hello")
+
+print("".join(gen))  # Output: "olleh"
+
+olleh
+
+
+
+
+
+def recursive_sum(n):
+
+    if n == 0:  
+
+        return 0  
+
+    return n + recursive_sum(n - 1)  
+
+​result = recursive_sum(10)
+
+print(result)
+
+55
+
+
+
+
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+even = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(even) 
+
+[2, 4, 6, 8, 10]
+
+
+
+
+
+def outer_function(a, b):
+
+    def inner_function():
+
+        return a + b  
+
+     return inner_function()+ 5  
+
+result = outer_function(3, 7)
+
+print(result) 
+
+15
+
