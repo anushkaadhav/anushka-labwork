@@ -36,7 +36,5 @@ int main()
         }
         out.close();
         cout<<"student information saved sucessfully";
-        
-        
         return 0;
   }
