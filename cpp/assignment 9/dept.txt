@@ -1,3 +1,0 @@
-1 aaaa dddd  4
-2 bbbb ggggg  7
-3 ccccc jjjjj  9
