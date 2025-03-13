@@ -26,7 +26,7 @@ public:
 
         cout << "Combined String: " << combined << endl;
 
-        delete[] combined;
+        delete[] combined;      
     }
 
     ~String()

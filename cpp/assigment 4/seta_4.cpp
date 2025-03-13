@@ -56,7 +56,8 @@ int main()
     cin >> num;
     
     PrimeChecker checker(num);
-    checker.check();
+   checker.check();
+    
     
     
     return 0;

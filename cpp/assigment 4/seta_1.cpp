@@ -19,7 +19,7 @@ public:
         }
     }
 
-    void bubbleSort()
+   void bubbleSort()
     {
         for (int i = 0; i < size - 1; i++)
         {

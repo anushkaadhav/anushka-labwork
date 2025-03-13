@@ -22,7 +22,7 @@ public:
         stock = st;
     }
 
-    void displayBookDetails() 
+void displayBookDetails() 
     {
         cout << "Author: " << author_name << endl;
         cout << "Title: " << title << endl;
@@ -49,9 +49,9 @@ public:
 int main()
 {
     string author = "R.k.Narayan";
-    string title = "my life";
+    string title = "my rules";
     float price = 34.99;
-    string publisher = "Bloomsbury";
+    string publisher = "abcd";
     int stock = 10;
 
     Bookshop book(author, title, price, publisher, stock);

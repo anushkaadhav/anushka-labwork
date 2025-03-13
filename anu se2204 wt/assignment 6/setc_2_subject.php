@@ -31,7 +31,7 @@ $xml->asXML('subject.xml');
 // Display players who have scored more than 100 runs
 echo "subject code of web tech lab:<br><br>";
 foreach ($xml->code as $code) {
-    if ($code->name= 'web technology laboratory')
+    if ($code->name== 'web technology laboratory')
      {
         echo "code: " . $code->subcode. "<br>";
         echo "name: " . $code->name. "<br>";
