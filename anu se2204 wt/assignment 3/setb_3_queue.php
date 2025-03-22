@@ -9,15 +9,21 @@ if (!isset($_SESSION['queue']))
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST['action'];
 
-    if ($action == "insert") {
+    if ($action == "insert") 
+    {
         $element = $_POST['element'];
         array_push($_SESSION['queue'], $element);
         $message = "Element '$element' inserted successfully.";
-    } elseif ($action == "delete") {
-        if (!empty($_SESSION['queue'])) {
+    } 
+    elseif ($action == "delete")
+     {
+        if (!empty($_SESSION['queue']))
+         {
             $removedElement = array_shift($_SESSION['queue']);
             $message = "Element '$removedElement' deleted successfully.";
-        } else {
+        } 
+        else
+         {
             $message = "Queue is empty. No element to delete.";
         }
     }
@@ -46,7 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <?php
-    if (isset($message)) {
+    if (isset($message)) 
+    {
         echo "<p>$message</p>";
     }
 

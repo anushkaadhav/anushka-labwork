@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contact List</h1>
+    <button id="printButton">Print</button>
+
+    <table id="contactTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Name</th>
+                <th>Residence Number</th>
+                <th>Mobile Number</th>
+                <th>Relation</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById("printButton").addEventListener("click", function()
+         {
+         
+            var xhr = new XMLHttpRequest();
+
+         
+            xhr.onload = function() 
+            {
+                if (xhr.status == 200) 
+                {
+                    var contacts = JSON.parse(xhr.responseText); 
+                    var tableBody = document.querySelector("#contactTable tbody");
+                    tableBody.innerHTML = ""; 
+                    var table = document.getElementById("contactTable");
+
+                  
+                    if (contacts.error) 
+                    {
+                        alert("Error: " + contacts.error);
+                        return;
+                    }
+
+                   
+                    contacts.forEach(function(contact)
+                     {
+                        var row = tableBody.insertRow();
+                        row.insertCell(0).textContent = contact.srno;
+                        row.insertCell(1).textContent = contact.name;
+                        row.insertCell(2).textContent = contact.residence_number;
+                        row.insertCell(3).textContent = contact.mobile_number;
+                        row.insertCell(4).textContent = contact.relation;
+                    });
+
+               
+                    table.style.display = "table";
+                }
+            };
+
+            
+            xhr.open("GET", "read_contact.php", true);
+            xhr.send();
+        });
+    </script>
+
+</body>
+</html>

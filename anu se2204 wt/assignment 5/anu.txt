@@ -1,0 +1,132 @@
+create table owner1(oname text primary key,address text, phonebo int);
+CREATE TABLE
+postgres=# create table property1(oname text,foreign key(oname) references owner1(oname) on delete cascade on update cascade,pno int primary key,desc1 text,area text);
+CREATE TABLE
+ create table own_pro(oname text,foreign key(oname) references owner1(oname) on delete cascade on update cascade,pno int,foreign key(pno) references property1(pno) on delete cascade on update cascade,primary key(oname,pno));
+CREATE TABLE
+ insert into owner1 values('anushka','shikrapur','876703258');
+INSERT 0 1
+postgres=# insert into owner1 values('tanuja','mumbai','87670123');
+INSERT 0 1
+postgres=# insert into owner1 values('malhar','thane','23470123');
+INSERT 0 1
+postgres=# insert into property1 values('malhar',244,'new','alandi');
+INSERT 0 1
+postgres=# insert into property1 values('malhar',221,'old','dehu');
+INSERT 0 1
+postgres=# insert into property1 values('anushka',621,'old','dehu');
+INSERT 0 1
+postgres=# insert into property1 values('anushka',234,'new','chakan');
+INSERT 0 1
+ insert into property1 values('tanuja',276,'new','chakan');
+INSERT 0 1
+postgres=# insert into property1 values('tanuja',212,'old','pune');
+INSERT 0 1
+postgres=# select * from owner1;
+  oname  |  address  |  phonebo  
+---------+-----------+-----------
+ anushka | shikrapur | 876703258
+ tanuja  | mumbai    |  87670123
+ malhar  | thane     |  23470123
+(3 rows)
+
+postgres=# select * from property1;
+  oname  | pno | desc1 |  area  
+---------+-----+-------+--------
+ malhar  | 244 | new   | alandi
+ malhar  | 221 | old   | dehu
+ anushka | 621 | old   | dehu
+ anushka | 234 | new   | chakan
+ tanuja  | 276 | new   | chakan
+ tanuja  | 212 | old   | pune
+(6 rows)
+
+postgres=# insert into own_pro values('tanuja','276');
+INSERT 0 1
+postgres=# insert into own_pro values('tanuja','212');
+INSERT 0 1
+postgres=# insert into own_pro values('anushka','621');
+INSERT 0 1
+postgres=# insert into own_pro values('anushka',234);
+INSERT 0 1
+postgres=# insert into own_pro values('malhar',244);
+INSERT 0 1
+postgres=# insert into own_pro values('malhar',221);
+INSERT 0 1
+
+
+
+
+CREATE TABLE client (
+postgres(#     clientno INT PRIMARY KEY,
+postgres(#     name VARCHAR(100),
+postgres(#     address VARCHAR(255)
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE sales_order (
+postgres(#     sonumber INT PRIMARY KEY,
+postgres(#     s_order_date DATE,
+postgres(#     clientno INT,
+postgres(#     FOREIGN KEY (clientno) REFERENCES client(clientno)
+postgres(# );
+CREATE TABLE
+postgres=# insert into client values(101,'anushka','pune');
+INSERT 0 1
+postgres=# insert into client values(102,'anurag','shikrapur');
+INSERT 0 1
+postgres=# insert into client values(103,'tanuja','dehu');
+INSERT 0 1
+postgres=# insert into sales_order values(10,'12-03-2025',101);
+INSERT 0 1
+postgres=# insert into sales_order values(11,'17-02-2025',101);
+INSERT 0 1
+postgres=# insert into sales_order values(12,'13-06-2024',102);
+INSERT 0 1
+postgres=# insert into sales_order values(13,'13-06-2026',102);
+INSERT 0 1
+postgres=# select * from client;
+ clientno |  name   |  address  
+----------+---------+-----------
+      101 | anushka | pune
+      102 | anurag  | shikrapur
+      103 | tanuja  | dehu
+(3 rows)
+
+postgres=# select * from sales_order;
+ sonumber | s_order_date | clientno 
+----------+--------------+----------
+       10 | 2025-03-12   |      101
+       11 | 2025-02-17   |      101
+       12 | 2024-06-13   |      102
+       13 | 2026-06-13   |      102
+(4 rows)
+
+
+
+
+
+
+
+
+
+ create table employee(eno int primary key,ename text,edesin text,esal int);
+CREATE TABLE
+insert into employee values(101,'datta','pune',1234);
+INSERT 0 1
+postgres=# insert into employee values(102,'rupali','mumbai',3234);
+INSERT 0 1
+postgres=# insert into employee values(103,'sham','dehu',3256);
+INSERT 0 1
+create table department(eno int,foreign key(eno) references employee(eno) on delete cascade on update cascade,dno int primary key,dname text,dloc text);
+CREATE TABLE
+postgres=# insert into department values(103,1,'cs','alandi');
+INSERT 0 1
+postgres=# insert into department values(103,2,'bsc','alandi');
+INSERT 0 1
+postgres=# insert into department values(102,3,'bcom','pune');
+INSERT 0 1
+postgres=# insert into department values(102,4,'bca','pune');
+INSERT 0 1
+postgres=# insert into department values(101,5,'bscagree','mumbai');
+INSERT 0 1
+

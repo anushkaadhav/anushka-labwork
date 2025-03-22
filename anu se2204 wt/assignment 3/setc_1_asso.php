@@ -2,14 +2,17 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['array1'])) {
+if (!isset($_SESSION['array1']))
+ {
     $_SESSION['array1'] = [];
 }
-if (!isset($_SESSION['array2'])) {
+if (!isset($_SESSION['array2']))
+ {
     $_SESSION['array2'] = [];
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+ {
     $action = $_POST['action'];
 
     if ($action == "set_arrays") 
@@ -68,7 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <?php
-    if (isset($message)) {
+    if (isset($message))
+     {
         echo "<p>$message</p>";
     }
 
